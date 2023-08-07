@@ -22,6 +22,7 @@ from .services import *
 
 _LOGGER = logging.getLogger(__name__)
 _inverter_scanner = InverterScanner()
+SCAN_INTERVAL = timedelta(seconds=5)
 
 
 def _do_setup_platform(hass: HomeAssistant, config, async_add_entities : AddEntitiesCallback):

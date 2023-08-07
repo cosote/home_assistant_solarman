@@ -24,7 +24,7 @@ LOOKUP_FILES = [
     'custom_parameters.yaml'
 ]
 
-MIN_TIME_BETWEEN_UPDATES = timedelta(seconds=15)
+MIN_TIME_BETWEEN_UPDATES = timedelta(seconds=2)
 
 CONF_INVERTER_HOST = 'inverter_host'
 CONF_INVERTER_PORT = 'inverter_port'
