@@ -8,6 +8,7 @@
 ###############################################################################
 
 import logging
+import re
 import voluptuous as vol
 from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
@@ -157,7 +158,7 @@ class SolarmanStatus(SolarmanSensor, Entity):
         return self.p_state
 
     def update(self):
-        self.p_state = getattr(self.inverter, self._field_name)
+        self.p_state = getattr(self.inverter, self._field_name, None)
 
 
 #############################################################################################################
@@ -186,6 +187,9 @@ class SolarmanSensorText(SolarmanStatus):
             if self._field_name in val:
                 self.p_state = val[self._field_name]
             else:
+                uom = getattr(self, 'uom', None)
+                if uom and (re.match("\S+", uom)):
+                    self.p_state = None
                 _LOGGER.debug(f'No value recorded for {self._field_name}')
 
 
