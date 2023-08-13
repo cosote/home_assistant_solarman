@@ -41,12 +41,14 @@ class Inverter:
         if self._modbus:
             return self._modbus
         
+        log.info(f"Connecting to Solarman")
         self._modbus = PySolarmanV5(self._host, self._serial, port=self._port, mb_slave_id=1, verbose=True, auto_reconnect=True)
         return self._modbus
 
     def disconnect_from_server(self):
         if self._modbus:
             try:
+                log.info(f"Disconnecting from Solarman")
                 self._modbus.disconnect()
             finally:
                 self._modbus = None
